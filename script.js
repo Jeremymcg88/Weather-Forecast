@@ -1,6 +1,6 @@
 
 // creating on click for search btn
-let searchBtn = document.getElementById('search');
+let searchBtn = document.getElementById('search-button');
 let cityInput = "";
 let clearInput = "";
 let cityName = "";
@@ -8,12 +8,13 @@ let cityName = "";
 
 // returns zip code information after the click happens 
 searchBtn.addEventListener('click', function() {
-    console.log(document.getElementById('location').value)
+    // console.log(document.getElementById('location').value)
+
 
 // API key that returns the zipcode typed in by user 
-   var url = `https://api.openweathermap.org/data/2.5/weather?q=${document.getElementById('location').value}&appid=bd0834857d11c7c26292f5e1e8657635&units=imperial`
+//    var url = `https://api.openweathermap.org/data/2.5/weather?q=${document.getElementById('location').value}&appid=bd0834857d11c7c26292f5e1e8657635&units=imperial`
 
-   console.log('Url ????', url)
+//    console.log('Url ????', url)
 
  // Always want to convert fetch responses to Json for user readability 
    fetch(url)
@@ -48,3 +49,7 @@ function oneCallApi(lat, lon) {
 
    });
 }
+
+
+
+
