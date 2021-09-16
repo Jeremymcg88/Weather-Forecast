@@ -14,7 +14,11 @@ let clearEl = document.getElementById('clear-history');
 //this is where we'll displayed the last 5 cities underneath the clear history button
 var historyEl = document.getElementById('history');
 
+//global VAR for displaying current weather 
 var currentWeather = document.getElementById('city-name');
+
+// UV index
+var currentUVEl = document.getElementById('UV-index');
 
 // will parse out the information from local storage 
 var searchHistory = localStorage.getItem("searchHistory")
@@ -38,12 +42,8 @@ searchBtn.addEventListener('click', function() {
           // API Key
           const APIkey = "bd0834857d11c7c26292f5e1e8657635";
 
-          // current weather 
-
-
-
-       
-        // API key that returns the zipcode typed in by user 
+     // API key that returns the zipcode typed in by user 
+    
         var url = `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=bd0834857d11c7c26292f5e1e8657635&units=imperial`
         console.log('Url ????', url)
         console.log(document.getElementById('city-input').value);
@@ -57,19 +57,22 @@ searchBtn.addEventListener('click', function() {
                 console.log('WHOLE DATA THING!!!!', data)
                 console.log('just the temp!',data.main.temp)
         
-                // Getting current day forecast 
-               
+                // Getting current day forecast
                 currentWeather.innerHTML=`City Name: ${data.name}`
+                currentWeather.classList.add("col-12");
                 var currentTempEl = document.getElementById('temperature');
-                currentTempEl.innerHTML=data.main.temp
+                currentTempEl.innerHTML=`Temperature: ${data.main.temp}`
                 var currentHumidityEl = document.getElementById('humidity');
-                currentHumidityEl.innerHTML=data.main.humidity;
+                currentHumidityEl.innerHTML=`Humidity: ${data.main.humidity}`;
                 var currentWindSpeedEl = document.getElementById('wind-speed');
-                currentWindSpeedEl.innerHTML = data.wind.speed;
+                currentWindSpeedEl.innerHTML = `Wind Speed: ${data.wind.speed}`; 
                 
-
+                
+              
+               
+               // API call that gives us our UVI 
                 oneCallApi(data.coord.lat, data.coord.lon)
-           });
+            });
         });
     
     
@@ -86,13 +89,21 @@ searchBtn.addEventListener('click', function() {
         })
        .then(function(data) {
             console.log('WHOLE DATA  ONE CALL API!!!!', data)
-       var currentUVEl = document.getElementById('UV-index');
-       currentUVEl.innerHTML=data.current.uvi;
-       var CurrentForecastImgEl=document.createElement('img');
-        CurrentForecastImgEl.setAttribute('src', `http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png`)
-         currentWeather.appendChild=CurrentForecastImgEl;
-       
-         weatherColumns.innerHTML="";
+
+           // grabbing image to display icon
+            var CurrentForecastImgEl=document.createElement('img');
+            CurrentForecastImgEl.setAttribute('src', `http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png`)
+            currentWeather.append(CurrentForecastImgEl);
+            
+            // Getting our UVI from the API OneCall which is grabbed from the long/lat data
+           
+            let UVIndex = document.createElement("span");
+            // UVIndex.setAttribute("class","badge badge-danger");
+            UVIndex.innerHTML = `${data.current.uvi}`
+            currentUVEl.innerHTML = "UV Index: ";
+            currentUVEl.append(UVIndex);
+            
+             weatherColumns.innerHTML="";
         
     for ( var i = 1; i < 6; i++) {
                    var currentDay = data.daily[i]
@@ -141,11 +152,10 @@ function renderSearchHistory() {
             oneCallApi(historyItem.value);
         })
         historyEl.append(historyItem);
-    }
+     }
 }
 
 renderSearchHistory();
-    
 
 
 // creating cards to display forcast
