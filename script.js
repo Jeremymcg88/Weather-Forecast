@@ -40,7 +40,7 @@ searchBtn.addEventListener('click', function() {
           console.log(searchHistory);
 
           // API Key
-          const APIkey = "bd0834857d11c7c26292f5e1e8657635";
+          var APIkey = "bd0834857d11c7c26292f5e1e8657635";
 
      // API key that returns the zipcode typed in by user 
     
@@ -102,6 +102,15 @@ searchBtn.addEventListener('click', function() {
             UVIndex.innerHTML = `${data.current.uvi}`
             currentUVEl.innerHTML = "UV Index: ";
             currentUVEl.append(UVIndex);
+
+            //
+
+            var uvUrl= "https://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid="+APIkey;
+            fetch(uvUrl) //Starting a second fetch request for to obtain the UV from the open weather API.
+            .then (function (response) {
+                console.log ("UV has a "+response);
+                return response.json();
+            })
             
              weatherColumns.innerHTML="";
         
