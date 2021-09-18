@@ -22,9 +22,9 @@ THEN I am again presented with current and future conditions for that city
 
 # SCREENSHOTS:
 
-![Screenshot](img\Weather Dashboard.png)
-![Screenshot](img\Weather Dashboard(1).png)
-![Screenshot](img\Weather Dashboard(2).png)
+![Screenshot](https://github.com/Jeremymcg88/Weather-Forecast/blob/main/img/Weather%20Dashboard(1).png)
+![Screenshot](https://github.com/Jeremymcg88/Weather-Forecast/blob/main/img/Weather%20Dashboard(2).png)
+![Screenshot](https://github.com/Jeremymcg88/Weather-Forecast/blob/main/img/Weather%20Dashboard.png)
 
 
 The link for the live wbesite:

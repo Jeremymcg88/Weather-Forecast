@@ -29,7 +29,7 @@ else
 {
     searchHistory=JSON.parse(searchHistory);
 }
-
+var APIkey = "bd0834857d11c7c26292f5e1e8657635";
 // Will return information from API when clicked.
 searchBtn.addEventListener('click', function() {
     var searchQuery = document.getElementById('city-input').value;
@@ -72,6 +72,8 @@ searchBtn.addEventListener('click', function() {
                
                // API call that gives us our UVI 
                 oneCallApi(data.coord.lat, data.coord.lon)
+
+                renderSearchHistory();
             });
         });
     
@@ -143,6 +145,8 @@ searchBtn.addEventListener('click', function() {
         return timeStampCon;
     };
 
+
+    // clears search history but page only after page is refreshed
     clearEl.addEventListener('click', function () {
         searchHistory = [];
         renderSearchHistory();
